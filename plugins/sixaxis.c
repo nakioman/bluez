@@ -242,14 +242,20 @@ static gboolean setup_leds(GIOChannel *channel, GIOCondition cond,
 
 	if (!data)
 		return FALSE;
+	
+	DBG("setup ledsssssssss");
 
 	if (cond & (G_IO_HUP | G_IO_ERR | G_IO_NVAL))
 		goto out;
+	
+	DBG("setup ledsssssssss no out");
 
 	if(!set_leds_sysfs(data)) {
 		int fd = g_io_channel_unix_get_fd(channel);
 		set_leds_hidraw(fd, data->bitmap);
 	}
+	
+	DBG("set ledsssssssss final");
 
 out:
 	leds_data_destroy(data);
